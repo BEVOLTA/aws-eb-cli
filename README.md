@@ -1,6 +1,7 @@
 # aws-eb-cli
 
-Simple docker image to allow use to have awsebcli in Github Action.
+A small Docker image providing the AWS Elastic Beanstalk CLI for GitHub Actions.
 
+Images are published to `ghcr.io/bevolta/aws-eb-cli`.
 
-Note: on every tag that follow semver a new version is build and deployed to Github registry.
+Every `vX.Y.Z` tag builds and publishes the corresponding `X.Y.Z` image tag.
