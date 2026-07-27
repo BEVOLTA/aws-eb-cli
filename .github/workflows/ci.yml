@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    name: Build and verify image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build --tag aws-eb-cli:test .
+
+      - name: Verify Python and EB CLI
+        run: |
+          docker run --rm aws-eb-cli:test python --version
+          docker run --rm aws-eb-cli:test eb --version

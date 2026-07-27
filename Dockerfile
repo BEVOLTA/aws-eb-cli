@@ -1,8 +1,11 @@
-FROM python:3.8-slim
+FROM python:3.12-slim
 
-RUN apt-get update && apt-get -y upgrade && apt-get install -y --no-install-recommends zip && apt-get install -y --no-install-recommends git && apt-get install -y --no-install-recommends make
+ARG AWSEBCLI_VERSION=3.27.3
 
-
-RUN pip3 install awsebcli==3.20.3 --upgrade --user
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git make zip \
+    && python -m pip install --no-cache-dir --upgrade "awsebcli==${AWSEBCLI_VERSION}" \
+    && eb --version \
+    && rm -rf /var/lib/apt/lists/*
 
 CMD ["/bin/bash"]
